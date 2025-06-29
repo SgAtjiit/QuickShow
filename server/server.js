@@ -17,11 +17,13 @@ const app = express();
 const port = 3000;
 await connectDB();
 //stripe webhooks route
+// server.js, near the top, *before* app.use(express.json())
 app.use(
-  "/api/stripe",
+  "/api/stripe", // lock down to POST and a unique path
   express.raw({ type: "application/json" }),
   stripeWebhooks
 );
+
 //Middleware
 app.use(express.json());
 app.use(cors());

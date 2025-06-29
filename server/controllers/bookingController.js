@@ -51,7 +51,7 @@ export const createBooking = async (req, res) => {
 
     //stripe gateway initialise
     const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY);
-
+    // console.log("I am in Booking controller", stripeInstance);
     //creating line items for stripe
     const line_items = [
       {
@@ -65,6 +65,7 @@ export const createBooking = async (req, res) => {
         quantity: 1,
       },
     ];
+    // console.log("I am in booking controller", line_items);
     const session = await stripeInstance.checkout.sessions.create({
       success_url: `${origin}/loading/my-bookings`,
       cancel_url: `${origin}/my-bookings`,
@@ -76,6 +77,7 @@ export const createBooking = async (req, res) => {
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60,
       //Expires in 30 minutes
     });
+    // console.log("I am in booking controller", session);
     booking.paymentLink = session.url;
     await booking.save();
     res.json({
