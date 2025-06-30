@@ -2,6 +2,7 @@ import { Inngest } from "inngest";
 import User from "../models/User.js";
 import Booking from "../models/booking.js";
 import Show from "../models/Show.js";
+import { model } from "mongoose";
 
 export const inngest = new Inngest({ id: "movie-ticket-booking" });
 
@@ -73,6 +74,18 @@ const releaseSeatsAndDeleteBooking = inngest.createFunction(
     });
   }
 );
+
+//ingest function to send an email to user when user books the show
+// const sendBookingConfirmationEmail = inngest.createFunction({id:'send-booking-confirmation-email'},
+//   {event:'app/show.booked'},
+//   async ({event,step})=>{
+//     const {bookingId} = event.data;
+//     const booking = await Booking.findById(bookingId).populate({
+//       path:'show',
+//       populate:{path:'movie',model:'Movie'}
+//     }).populate('user');
+//   }
+// )
 export const functions = [
   syncUserCreation,
   syncUserDeletion,

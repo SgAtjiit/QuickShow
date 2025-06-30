@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import MovieDetails from "./pages/MovieDetails";
 import Favourite from "./pages/Favourite";
